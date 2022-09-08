@@ -1,9 +1,37 @@
 import type { NextPage } from "next";
+import { FormEvent, useState } from "react";
+import { SearchResults } from "../components/SearchResults";
 
 const Home: NextPage = () => {
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+
+  async function handleSearch(event: FormEvent) {
+    event.preventDefault(); //evitar que atualize a página
+
+    if (!search.trim()) {
+      //verifica search está vazio incluindo espaço em branco.
+      return;
+    }
+
+    const response = await fetch(`http://localhost:3333/products?q=${search}`);
+    const data = await response.json();
+
+    setResults(data);
+  }
+
   return (
     <div>
-      <h1>Hello world</h1>
+      <h1>Search</h1>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type="submit">Buscar</button>
+      </form>
+      <SearchResults results={results} />
     </div>
   );
 };
