@@ -5,19 +5,23 @@ interface SearchResultsProps {
   results: Array<{
     id: number;
     price: number;
+    priceFormatted?: string;
     title: string;
   }>;
+  totalPrice: number;
   onAddToWishlist: (id: number) => void;
 }
 export function SearchResults({
   results,
+  totalPrice,
   onAddToWishlist,
 }: SearchResultsProps) {
-  const totalPrice = useMemo(() => {
-    return results.reduce((total, product) => {
-      return total + product.price;
-    }, 0);
-  }, [results]);
+  // MOVIDO FORMATAÇÃO - MELHORIA, NAO EXECUTAR SEMPRE CÁLCULO
+  //   const totalPrice = useMemo(() => {
+  //     return results.reduce((total, product) => {
+  //       return total + product.price;
+  //     }, 0);
+  //   }, [results]);
 
   // <Component totalPrice={} />
 
