@@ -34,6 +34,7 @@
  * 2. function ProductItemComponent({ product }: ProductItemProps) { ... }
  *    //no final do ficheiro
  *    export const ProductItem = memo(ProductItemComponent)
+ *
  */
 import { memo } from "react";
 
@@ -43,11 +44,18 @@ interface ProductItemProps {
     price: number;
     title: string;
   };
+  onAddToWishlist: (id: number) => void;
 }
-export function ProductItemComponent({ product }: ProductItemProps) {
+export function ProductItemComponent({
+  product,
+  onAddToWishlist,
+}: ProductItemProps) {
   return (
     <div>
       {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>
+        add to wishlist
+      </button>
     </div>
   );
 }
