@@ -38,6 +38,8 @@
  */
 import { memo, useState } from "react";
 
+import lodash from "lodash";
+
 /**
  * Lazy load
  *
@@ -105,6 +107,16 @@ export const ProductItem = memo(
   (prevProps, nextProps) => {
     //vamos comparar as props recebidas (product)
     // Object.is(...) método de comparação custa pouco mais na performance, usado com cuidado, com dados ou componentes complexo.
-    return Object.is(prevProps.product, nextProps.product);
+
+    // commented to use lodash to get example to analyzer
+    //return Object.is(prevProps.product, nextProps.product);
+
+    /**
+     * analyzer example
+     *
+     * Verificando se os dois parâmetros sao iguais comparando profundamente*
+     *
+     */
+    return lodash.isEqual(prevProps.product, nextProps.product);
   }
 );

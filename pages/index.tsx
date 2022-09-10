@@ -102,3 +102,25 @@ export default Home;
  *  - dynamic from 'next/dynamic' - funciona next ou qualquer app react (react: {lazy} from "react")
  *
  */
+
+/**
+ *      Bundle Analyzer
+ * !!! usado/analisado antes de colocar o app para produção, para ver quanto importações/pacotes estão impactar na nossa app!
+ *
+ *  github -> yarn add @next/bundle-analyzer
+ *
+ * - Vamos analisar o que biblioteca pode e irá fazer nossa app ficar lenta, pesada para carregar se nao for usado corretamente.
+ * -- tipo o lodash*
+ *
+ *  CRIAR e ADD no ficheiro na raiz app - next.config.js
+ *
+ *   const withBundleAnalyzer = require('@next/bundle-analyzer')({
+ *     enabled: process.env.ANALYZE === 'true',
+ *   })
+ *   module.exports = withBundleAnalyzer({})
+ *
+ *
+ *  EXECUTAR
+ * # Analyze is done on build when env var is set
+ *   ANALYZE=true yarn build
+ */
