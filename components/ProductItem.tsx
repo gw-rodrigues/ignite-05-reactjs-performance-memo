@@ -36,7 +36,31 @@
  *    export const ProductItem = memo(ProductItemComponent)
  *
  */
-import { memo } from "react";
+import { memo, useState } from "react";
+
+/**
+ * Lazy load
+ *
+ * Precisamos import componente
+ * Precisamos import tipagens, se tiver
+ * Recebe segundo parâmetro, para passar spinner ou algo gênero caso internet for lenta e demorar a carregar componente.
+ */
+import dynamic from "next/dynamic";
+import { AddProductToWishlistProps } from "./AddProductToWishlist";
+
+const AddProductToWishlistLazy = dynamic<AddProductToWishlistProps>(
+  () => {
+    // Caso o export do componente for default "export default function ..."
+    // return import("./AddProductToWishlist");
+    //Caso nao estiver a usar
+    return import("./AddProductToWishlist").then(
+      (mod) => mod.AddProductToWishlist
+    );
+  },
+  {
+    loading: () => <span>Carregando....</span>,
+  }
+);
 
 interface ProductItemProps {
   product: {
@@ -51,12 +75,27 @@ export function ProductItemComponent({
   product,
   onAddToWishlist,
 }: ProductItemProps) {
+  const [isAddingToWishlist, setIsAddToWishlist] = useState(false);
+
+  //Lazy loading in-line with function
+
+  // async function showFormattedDate() {
+  //   const { format } = await import("date-fns");
+  //   format();
+  // }
+
   return (
     <div>
       {product.title} - <strong>{product.priceFormatted}</strong>
-      <button onClick={() => onAddToWishlist(product.id)}>
-        add to wishlist
+      <button onClick={() => setIsAddToWishlist(true)}>
+        Adicionar aos Favoritos
       </button>
+      {isAddingToWishlist && (
+        <AddProductToWishlistLazy
+          onAddToWishlist={() => onAddToWishlist(product.id)}
+          onRequestClose={() => setIsAddToWishlist(false)}
+        />
+      )}
     </div>
   );
 }

@@ -89,3 +89,15 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+/**
+ * Dividindo código (Code-Splitting)
+ * reactjs.org/docs/code-splitting.html
+ *
+ * - a funcionalidade ou poder que temos de importar algum arquivo, funcionalidade, componente somente quando for usado, no bundle. (bundle.js ou build.js)
+ * - ? bundle.js - tem todas as configurações da nossa app (Next js ve todas as configurações, importações e coloca bundle.js).
+ *
+ *  - Fazer o carregamento "Lazy loading" fazer so carregamento do componente* apenas quando for exibido em tela, aplicação.
+ *  - dynamic from 'next/dynamic' - funciona next ou qualquer app react (react: {lazy} from "react")
+ *  -
+ */
