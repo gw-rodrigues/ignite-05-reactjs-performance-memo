@@ -39,6 +39,7 @@ const Home: NextPage = () => {
     const data = await response.json();
 
     /**
+     * useCallback | useMemo
      * GERALMENTE A FORMATAÇÃO CÁLCULOS DOS DADOS E FEITO NA HORA DA BUSCA!
      * no momento busca info enviar ficar criando useMemo, etc...
      */
@@ -91,7 +92,7 @@ const Home: NextPage = () => {
 export default Home;
 
 /**
- * Dividindo código (Code-Splitting)
+ * Dividindo código (Code-Splitting) - React lazy | Next/dynamic
  * reactjs.org/docs/code-splitting.html
  *
  * - a funcionalidade ou poder que temos de importar algum arquivo, funcionalidade, componente somente quando for usado, no bundle. (bundle.js ou build.js)
@@ -99,5 +100,5 @@ export default Home;
  *
  *  - Fazer o carregamento "Lazy loading" fazer so carregamento do componente* apenas quando for exibido em tela, aplicação.
  *  - dynamic from 'next/dynamic' - funciona next ou qualquer app react (react: {lazy} from "react")
- *  -
+ *
  */
